@@ -1,0 +1,29 @@
+--init.ora
+
+SELECT *
+FROM   NLS_DATABASE_PARAMETERS
+;
+--
+SELECT *
+FROM   NLS_SESSION_PARAMETERS
+;
+--
+SELECT *
+FROM   NLS_INSTANCE_PARAMETERS
+;
+------
+SELECT *
+FROM   V$PARAMETER
+;
+------
+SELECT *
+FROM   V$NLS_VALID_VALUES
+;
+
+-- --------------------------------------------------------------------------------------------- --
+El Conjunto de Caracteres de la BdeD(UTF8) y el del Cliente (???) deben estar configurados igual
+para evitar resultados inesperados.
+-- --------------------------------------------------------------------------------------------- --
+Para esto desde el editor de registros setea la variable NLS_LANG en la ruta
+HKEY_LOCAL_MACHINE\SOFTWARE\ORACLE\KEY_"application_name"\ con el valor:
+LATIN AMERICAN SPANISH_COLOMBIA.UTF8 | WE8ISO8859P1 | SPANISH_SPAIN.WE8MSWIN1252

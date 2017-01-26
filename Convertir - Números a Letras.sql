@@ -1,0 +1,1 @@
+SELECT AP_AMOUNT_UTILITIES_PKG.ap_convert_number(55) FROM dual;

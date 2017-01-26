@@ -1,0 +1,65 @@
+FOR indx IN 1..N
+  LOOP
+    DBMS_OUTPUT.PUT_LINE(indx);    
+  END LOOP;
+
+-- SINTAX1
+DECLARE
+  CURSOR c_test
+  IS  SELECT ROWNUM AS fila_num
+        FROM   dual
+     CONNECT BY ROWNUM <= 10;
+   
+    r_test c_test%ROWTYPE;
+--  l_fila VARCHAR2(25);
+BEGIN
+   OPEN c_test;
+     LOOP
+        FETCH c_test INTO r_test;
+--      FETCH c_test INTO l_fila[, l_var2, l_var3]		
+        EXIT WHEN c_test%NOTFOUND;
+          DBMS_OUTPUT.put_line(r_test.fila_num);
+--        DBMS_OUTPUT.put_line(l_fila[, l_var2, l_var3]);		  
+     END LOOP;
+   CLOSE c_test;
+    /*
+    FOR r_test in c_test
+    LOOP
+       DBMS_OUTPUT.put_line(r_test.fila_num);
+    END LOOP;	
+	/*
+END;
+
+-- SINTAX2
+FOR r_cursor_name IN (SELECT * FROM DUAL)
+LOOP
+END LOOP;
+
+-- TYPE TABLE
+DECLARE
+  TYPE_TABLE_NAME APPS.WSH_DELIVERY_DETAILS_PUB.ID_TAB_TYPE;
+BEGIN
+  FOR j IN 1..5
+    LOOP
+      TYPE_TABLE_NAME(j) := j*5487;
+    END LOOP; 
+ 
+  FOR indx IN NVL (TYPE_TABLE_NAME.FIRST, 0)..NVL (TYPE_TABLE_NAME.LAST, -1)
+  LOOP
+    DBMS_OUTPUT.PUT_LINE(TYPE_TABLE_NAME(indx));
+  END LOOP;
+END;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ATRIBUTOS DE CURSORES
++  Toman los valores TRUE, FALSE o NULL dependiendo de la situación: 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
++
++ Atributo	  Antes de abrir  Al abrir	Durante la recuperación	  Al finalizar la recuperación	Después de cerrar
++ %NOTFOUND	  ORA-1001	  	  NULL		FALSE			          TRUE				            ORA-1001
++ %FOUND	  ORA-1001	      NULL		TRUE			          FALSE							ORA-1001
++ %ISOPEN	  FALSE	    	  TRUE		TRUE			          TRUE							FALSE
++ %ROWCOUNT	  ORA-1001	      0	    	*	    		          **	   						ORA-1001
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++    * Número de registros que ha recuperado hasta el momento
++    ** Número de total de registros
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

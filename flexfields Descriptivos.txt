@@ -1,0 +1,60 @@
+--Juego de VALORES (System Administrator>Application>Validation>Definir> [Independiente])
+SELECT *--fvt.description
+FROM   fnd_flex_value_sets f
+      ,FND_FLEX_VALUES FV
+      ,fnd_flex_values_tl fvt
+WHERE  f.flex_value_set_name LIKE 'XXMU%'
+--AND    fvt.flex_value_meaning = &p_att1
+AND   FV.FLEX_VALUE_SET_ID = f.flex_value_set_id
+AND   fvt.flex_value_id = fv.flex_value_id
+AND   fvt.language = USERENV('LANG')
+;
+
+--FLEXFIELD CLAVE 
+SELECT FIT.*
+FROM  FND_FLEX_VALUE_SETS FS 
+     ,FND_ID_FLEX_SEGMENTS FIS
+     ,FND_ID_FLEX_SEGMENTS_TL FIT
+WHERE  1 = 1
+AND   FS.FLEX_VALUE_SET_NAME = 'GM_VE_DATOS_VENEZUELA'
+AND   FIS.flex_value_set_id = FS.flex_value_set_id 
+AND   FIT.ID_FLEX_NUM = FIS.ID_FLEX_NUM
+AND   FIT.LANGUAGE = USERENV('LANG')
+--AND   FIT.FORM_LEFT_PROMPT = 'CONDICION MONTEPIO'
+;
+
+--FLEXFIELD DESCRIPTIVE
+SELECT END_USER_COLUMN_NAME,
+       DESCRIPTION,
+       ENABLED_FLAG,
+       APPLICATION_COLUMN_NAME,
+       COLUMN_SEQ_NUM,
+       DISPLAY_FLAG,
+       DEFAULT_VALUE,
+       RUNTIME_PROPERTY_FUNCTION,
+       REQUIRED_FLAG,
+       SECURITY_ENABLED_FLAG,
+       DISPLAY_SIZE,
+       MAXIMUM_DESCRIPTION_LEN,
+       CONCATENATION_DESCRIPTION_LEN,
+       FORM_ABOVE_PROMPT,
+       FORM_LEFT_PROMPT,
+       APPLICATION_ID,
+       DESCRIPTIVE_FLEXFIELD_NAME,
+       DESCRIPTIVE_FLEX_CONTEXT_CODE,
+       RANGE_CODE,
+       LAST_UPDATE_DATE,
+       LAST_UPDATED_BY,
+       LAST_UPDATE_LOGIN,
+       CREATED_BY,
+       CREATION_DATE,
+       FLEX_VALUE_SET_ID,
+       DEFAULT_TYPE,
+       SRW_PARAM,
+       ROW_ID
+  FROM FND_DESCR_FLEX_COL_USAGE_VL
+ WHERE (APPLICATION_ID = '260')
+   AND (DESCRIPTIVE_FLEXFIELD_NAME LIKE 'CE_BANK_ACCOUNTS')
+   AND (DESCRIPTIVE_FLEX_CONTEXT_CODE = 'Global Data Elements')
+ ORDER BY COLUMN_SEQ_NUM
+ ;

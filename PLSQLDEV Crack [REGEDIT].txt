@@ -1,0 +1,14 @@
+Desde el REGEDIT
+
+HKEY_CURRENT_USER>
+   Software>Allround Automations>PL/SQL Developer>Preferences
+		
+		Eliminamos el objeto Version
+		
+Luego desde:
+   HKEY_CURRENT_USER>
+    Software>Microsoft
+	     >Security
+		    
+			Eliminamos DUMP Y SHIELD1, (Ambos objetos) 
+	

@@ -1,0 +1,6 @@
+ TYPE ttstock IS TABLE OF NUMBER INDEX BY VARCHAR2(64);
+    vstock ttstock;
+
+ IF NOT (vstock.exists(l_categor.category_id)) THEN
+  vstock(l_categor.category_id) := nstock;
+ END IF;  

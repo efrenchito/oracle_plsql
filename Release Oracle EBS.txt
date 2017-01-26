@@ -1,0 +1,2 @@
+--RELEASE
+select pg.release_name, pg.* FROM apps.fnd_product_groups pg;

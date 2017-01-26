@@ -1,0 +1,6 @@
+-- SID & HOST_NAME
+SELECT * FROM V$VERSION;
+SELECT * FROM nls_database_parameters; 
+SELECT instance FROM v$thread;
+select * from v$instance;
+select * from fnd_product_groups;

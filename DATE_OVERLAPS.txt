@@ -1,0 +1,33 @@
+caso1
+                    11------------------12
+      21---------22                         21---------22
+
+caso2
+                    11------------------12
+      21------------------------------------------22
+
+caso3
+                  11---------------------12
+       21---------------------22
+
+caso4
+                11-------------------------12
+                    21--------22    21------------------------22
+
+===============================================================================
+FUNCTION overlaps_dates( p_date11 IN DATE
+                        ,p_date12 IN DATE
+                        ,p_date21 IN DATE
+                        ,p_date22 IN DATE ) RETURN VARCHAR2 IS
+    x_overlaps VARCHAR2(1) := 'N';
+  BEGIN
+
+    IF    p_date22 BETWEEN p_date11 AND p_date12
+       OR p_date21 BETWEEN p_date11 AND p_date12
+       OR p_date11 BETWEEN p_date21 AND p_date22 THEN
+
+       x_overlaps := 'Y';
+    END IF;
+
+    RETURN x_overlaps;
+  END overlaps_dates;

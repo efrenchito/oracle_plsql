@@ -1,0 +1,27 @@
+,XXMU_DEV_REPORT_PK.CONVERT_UOM_ITEM(msib.primary_uom_code,'gal',msib.INVENTORY_ITEM_ID ) * ool.ordered_quantity as Cantidad_Sec_Pedida
+      --,NVL(SS.cancelled_quantity2,0)                           as Cantidad_Sec_Cancelada 
+      --,(SS.cancelled_quantity/MUC.CONVERSION_RATE)             as Cantidad_Sec_Cancelada
+      ,XXMU_DEV_REPORT_PK.CONVERT_UOM_ITEM(msib.primary_uom_code,'gal',msib.INVENTORY_ITEM_ID ) * ool.cancelled_quantity as Cantidad_Sec_Cancelada
+      --,NVL(SS.fulfilled_quantity2,0)                           as Cantidad_Sec_Cumplida
+      --,(SS.fulfilled_quantity/MUC.CONVERSION_RATE)             as Cantidad_Sec_Cumplida
+      ,XXMU_DEV_REPORT_PK.CONVERT_UOM_ITEM(msib.primary_uom_code,'gal',msib.INVENTORY_ITEM_ID ) * ool.fulfilled_quantity as Cantidad_Sec_Cumplida
+      --,NVL((SS.invoiced_quantity/MUC.CONVERSION_RATE),0)       as Cantidad_Sec_Facturada
+      ,XXMU_DEV_REPORT_PK.CONVERT_UOM_ITEM(msib.primary_uom_code,'gal',msib.INVENTORY_ITEM_ID ) * ool.invoiced_quantity as Cantidad_Sec_Facturada
+      --,NVL(MRE.secondary_reservation_quantity,0)               as Cantidad_Sec_Reservada
+      --,NVL((MRE.reservation_quantity/MUC.CONVERSION_RATE),0)   as Cantidad_Sec_Reservada
+      ,XXMU_DEV_REPORT_PK.CONVERT_UOM_ITEM(msib.primary_uom_code,'gal',msib.INVENTORY_ITEM_ID ) * MRE.reservation_quantity as Cantidad_Sec_Reservada
+	  
+	  --XXMU_DEV_REPORT_PK .CONVERT_UOM_ITEM
+ SELECT CONVERSION_RATE --INTO X_CONVERT
+        FROM BOLINF.DEV_MTL_UOM_CLASS_CONV
+        WHERE INVENTORY_ITEM_ID = P_ITEM_ID
+          AND FROM_UOM_CODE = P_FROM_UNIT
+          AND TO_UOM_CODE = P_TO_UNIT
+          AND NVL(DISABLED,'N') != 'Y' ;
+          
+      APPS.INV_CONVERT.INV_UM_CONVERSION(
+            FROM_UNIT => P_FROM_UNIT
+            ,TO_UNIT => P_TO_UNIT
+            ,ITEM_ID => P_ITEM_ID
+            ,UOM_RATE => X_CONVERT
+          );    

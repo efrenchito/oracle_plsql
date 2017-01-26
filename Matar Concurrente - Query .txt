@@ -1,0 +1,12 @@
+DECLARE
+a VARCHAR2 (4000);
+b BOOLEAN;
+BEGIN
+  fnd_global.APPS_INITIALIZE(9975,56899,101);  --- USER_ID,RESP_ID,RESP_APPL_ID
+  b:=fnd_concurrent.cancel_request(39907279,a);  --- REQUEST_ID,Mensaje Salida
+  IF b THEN
+     dbms_output.put_line ('FIN');
+  END IF;
+  dbms_output.put_line (a);
+  COMMIT;
+END;

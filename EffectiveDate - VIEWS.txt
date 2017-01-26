@@ -1,0 +1,5 @@
+--Cuando en una vista tenga restricciones relacionadas con la fecha efectiva de la sesion 
+--y por este motivo no muestre datos, hacer lo siguiente
+
+INSERT INTO fnd_sessions VALUES(userenv('sessionid'), TRUNC(SYSDATE));
+COMMIT;

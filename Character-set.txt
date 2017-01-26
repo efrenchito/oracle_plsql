@@ -1,0 +1,13 @@
+TRANSLATE()
+REPLACE()
+SELECT CONVERT('TEXTOCONÑTILDES', 'US7ASCII') FROM dual;
+SELECT SUBSTR(upper(utl_raw.cast_to_varchar2((nlssort('TEXTOCONÑTILDESáé´róúü', 'nls_sort=binary_ai')))),1,30) FROM DUAL;
+/*
+US7ASCII      US 7-bit ASCII character set
+WE8DEC        West European 8-bit character set
+WE8HP         HP West European Laserjet 8-bit character set
+F7DEC         DEC French 7-bit character set
+WE8EBCDIC500  IBM West European EBCDIC Code Page 500
+WE8PC850      IBM PC Code Page 850
+WE8ISO8859P1	ISO 8859-1 West European 8-bit character set
+*/

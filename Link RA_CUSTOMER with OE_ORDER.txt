@@ -1,0 +1,5 @@
+ oeh.header_id = trxl.interface_header_attribute1
+ 
+ oel.line_id   = DECODE ( RTRIM (trxl.interface_line_attribute6, '0123456789'),
+                          NULL, TO_NUMBER (trxl.interface_line_attribute6),
+						  NULL )
